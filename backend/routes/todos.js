@@ -15,19 +15,16 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    console.log(req);
-    const body = req.body
-
-    if ((body.name !== undefined && body.text !== undefined){
-
+    const body = req.body;
+    console.log(body.name && body.text !== undefined);
+    if (body.name !== undefined && body.text !== undefined) {
+      const todosList = await todos.addTodo(body);
+      console.log(todosList);
+      res.send(todosList);
     }
-    // const todosList = await todos.getTodosList();
-    // res.send(todosList);
   } catch (e) {
     console.error(e);
   }
 });
-
-    console.log(123)
 
 module.exports = router;

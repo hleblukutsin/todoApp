@@ -3,7 +3,7 @@ const dataBase = require('../services/database');
 class Todos {
   getTodosList = async () => {
     try {
-      const todosCollection = await dataBase.db.collection('todos');
+      const todosCollection = dataBase.db.collection('todos');
       const todos = await todosCollection.find().toArray();
 
       return todos;
@@ -12,10 +12,10 @@ class Todos {
     }
   };
 
-  addTodo = async () => {
+  addTodo = async (data) => {
     try {
-      const todosCollection = await dataBase.db.collection('todos');
-      const todos = await todosCollection.find().toArray();
+      const todosCollection = dataBase.db.collection('todos');
+      const todos = await todosCollection.insertOne(data);
 
       return todos;
     } catch (e) {
